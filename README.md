@@ -16,7 +16,8 @@ If you would like to add or remove a name from the bad names list you can do tha
 
 Changing badNames[0] to Ooper instead of player, will kick people with the name Ooper and now allow the name player.
 
-```[NoNameKick.KickNoNames]
+```
+[NoNameKick.KickNoNames]
 kickMessagePrefix="[NoNameKick]:"
 kickMessageStart="You got kicked for using an illegal FART IT STINKS name."
 kickMessageEnd="You can join the server once you changed your name."
