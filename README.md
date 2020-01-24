@@ -1,5 +1,7 @@
 # KickBadNames
- A mutator for UT servers that kicks people with certain names
+This package scans player names, and if they are using a name you would not like in your server this mutator will stop them from joining your server. From build 2 onward this package will now scan for patterns of characters as well, for example if you don't want anyone to have the pattern "Fart" anywhere in their name you can simply modify NoNameKick.ini and change one of the wildcards to wildCards[0]="fart". Please note that the names and wildcards are case insensitive.
+
+By default this package will stop people joining with player, n****r, c**t, and f****t in their name.
 
 
 
