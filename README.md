@@ -16,11 +16,11 @@ By default this package will stop people joining with player, n****r, c**t, and 
 
 If a player has a banned name they will be show this message:
 
-![alt text](https://i.imgur.com/3Tu5ZWE.png "Kick type 1")
+![alt text](https://i.imgur.com/4N1Yyqq.png "Kick type 1")
 
 If a players name contains a banned pattern they will be show this message:
 
-![alt text](https://i.imgur.com/4N1Yyqq.png "kick type 2")
+![alt text](https://i.imgur.com/3Tu5ZWE.png "kick type 2")
 
 ## Changing banned names
 
