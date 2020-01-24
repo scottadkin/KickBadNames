@@ -5,9 +5,9 @@
 
 ## Installation
 
-- Place NoNameKick.u, and NoNameKick.ini in your UnrealTournament System folder.
-- Open UnrealTournament.ini and find the block called **ServerActors=NoNameKick.NoNameKickServerActor**
-- Added the following line at the end of the block: **ServerActors=NoNameKick.NoNameKickServerActor**, Note: if you are using XC_Engine you must place this in the block **[XC_Engine.XC_GameEngine]**
+- Place NoNameKick2.u, and NoNameKick2.ini in your UnrealTournament System folder.
+- Open UnrealTournament.ini and find the block called **[Engine.GameEngine]**, or if your server is running XC_Engine **[XC_Engine.XC_GameEngine]**.
+- Added the following line at the end of the block: **ServerActors=NoNameKick2.NoNameKickServerActor**.
 
 
 ## Changing banned names
@@ -19,7 +19,7 @@ Changing badNames[0] to Ooper instead of player, will kick people with the name 
 If you would like a certain pattern of characters to not be allowed in names, simply change one of the wildcards[number]="" to wildcards[number]="badword".
 
 ```
-[NoNameKick.KickNoNames]
+[NoNameKick2.KickNoNames]
 kickMessagePrefix="[NoNameKick]:"
 kickMessageStart="You got kicked for using an illegal name."
 kickMessageEnd="You can join the server once you changed your name."
@@ -321,3 +321,9 @@ badNames[252]=""
 badNames[253]=""
 badNames[254]=""
 ```
+
+
+
+##Change Log
+- 23/01/20 First release
+- 24/01/20 Wildcard release, cleaned up code.
