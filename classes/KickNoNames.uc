@@ -1,14 +1,16 @@
 //=============================================================================
 // KickNoNames.
+// Created by Scott 'Ooper' Adkin 23/01/20
+// Version 2 added wildcards for names 24/01/20
 //=============================================================================
-class KickNoNames expands Mutator config( NoNameKick );
+class KickNoNames expands Mutator config( NoNameKick2 );
 
 var() config string wildcards[32];
 var() config string badNames[255];
 var() config string kickMessagePrefix;
-var() config string kickMessageStart;// = "[NoNameKick]: You got kicked for using an illegal name.";
-var() config string kickMessages[10];// = "[NoNameKick]: You can't join the server with the name Player(number[s])";
-var() config string kickMessageEnd;// = "[NoNameKick]: You can join the server once you have changed your name.";
+var() config string kickMessageStart;
+var() config string kickMessages[10];
+var() config string kickMessageEnd;
 
 
 
@@ -18,39 +20,53 @@ function bool bValidName(string currentName){
 	
 	for(i = 0; i < 255; i++){
 	
-		LOG("badNames[" $ i $ "] = "$badNames[i]);
+		if(badNames[i] == ""){
+			return true;
+		}
 
 		if(currentName ~= badNames[i]){
 			return false;
 		}
 	}
 
-	
 	return true;
 }
 
 function int getWildcardIndex(string currentName){
 
 	local int i;
-
 	local int wIndex;
 
 	for(i = 0; i < 32; i++){
 
-		//if(wildcards[i] != None){
-			if(wildcards[i] != ""){
-				wIndex = inStr(Caps(currentName), Caps(wildcards[i]));
+		if(wildcards[i] != ""){
 
-				if(wIndex != -1){
+			wIndex = inStr(Caps(currentName), Caps(wildcards[i]));
 
-					return i;
-				}
+			if(wIndex != -1){
+
+				return i;
 			}
-		//}
+
+		}else{
+
+			return -1;
+		}
 	}
 
 	return -1;
 
+}
+
+function KickPlayer(Pawn Other, string KickMesssage){
+
+
+	Other.ClientMessage(kickMessagePrefix $ kickMessageStart);
+	Other.ClientMessage(kickMessagePrefix $ KickMesssage);
+	Other.ClientMessage(kickMessagePrefix $ kickMessageEnd);
+
+	Other.Destroy();
+	return;
 }
 
 
@@ -74,26 +90,13 @@ function ModifyPlayer(Pawn Other){
 	
 			if(wildcardIndex != -1){
 				
-				Log("wildcard found in name");
-
-				Other.ClientMessage(kickMessagePrefix $ kickMessageStart);
-				Other.ClientMessage(kickMessagePrefix $ kickMessages[1] $ wildcards[wildcardIndex] $ kickMessages[2]);
-				Other.ClientMessage(kickMessagePrefix $ kickMessageEnd);
-
-				Other.Destroy();
-				return;
+				KickPlayer(Other, kickMessages[1] $ wildcards[wildcardIndex] $ kickMessages[2]);
 			
 			}else if(!bValidName(pr.PlayerName)){
 
-				Other.ClientMessage(kickMessagePrefix $ kickMessageStart);
-				Other.ClientMessage(kickMessagePrefix $ kickMessages[0]);
-				Other.ClientMessage(kickMessagePrefix $ kickMessageEnd);
+				KickPlayer(Other, kickMessages[0]);
 
-				Other.Destroy();
-				return;
-
-			}				
-			
+			}						
 		}	
 	}
 
@@ -108,7 +111,7 @@ defaultproperties
      wildCards(0)="player"
      wildCards(1)="nigger"
      wildCards(2)="faggot"
-     badNames(0)="Ooper"
+     badNames(0)="cunt"
      badNames(1)="player1"
      badNames(2)="player2"
      badNames(3)="player3"
