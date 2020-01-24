@@ -12,6 +12,16 @@ By default this package will stop people joining with player, n****r, c**t, and 
 - Added the following line at the end of the block: **ServerActors=NoNameKick2.NoNameKickServerActor**.
 
 
+## Kick results
+
+If a player has a banned name they will be show this message:
+
+![alt text](https://i.imgur.com/3Tu5ZWE.png "Kick type 1")
+
+If a players name contains a banned pattern they will be show this message:
+
+![alt text](https://i.imgur.com/4N1Yyqq.png "kick type 2")
+
 ## Changing banned names
 
 If you would like to add or remove a name from the bad names list you can do that by opening NoNameKick.ini and changing the list of names.
