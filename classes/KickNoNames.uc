@@ -2,8 +2,9 @@
 // KickNoNames.
 // Created by Scott 'Ooper' Adkin 23/01/20
 // Version 2 added wildcards for names 24/01/20
+// Version 3 fixed kick messages not being displayed when player joins server after game has started.
 //=============================================================================
-class KickNoNames expands Mutator config( NoNameKick2 );
+class KickNoNames expands Mutator config( NoNameKick3 );
 
 var() config string wildcards[32];
 var() config string badNames[255];
@@ -11,6 +12,9 @@ var() config string kickMessagePrefix;
 var() config string kickMessageStart;
 var() config string kickMessages[10];
 var() config string kickMessageEnd;
+
+var() string currentKickName;
+var() string currentKickMessage;
 
 
 
@@ -58,15 +62,43 @@ function int getWildcardIndex(string currentName){
 
 }
 
-function KickPlayer(Pawn Other, string KickMesssage){
+function Timer(){
+
+	local Pawn p;
+
+	for(p = Level.PawnList; p != None; p=p.NextPawn){
+		
+		if(p.PlayerReplicationInfo != None){
+	
+			if(p.PlayerReplicationInfo.PlayerName ~= currentKickName){
+
+				p.ClientMessage(kickMessagePrefix $ kickMessageStart);
+				p.ClientMessage(kickMessagePrefix $ currentKickMessage);
+				p.ClientMessage(kickMessagePrefix $ kickMessageEnd);
+				
+				p.destroy();
+				return;
+			}
+		}
+	}
+}
+
+function KickPlayer(Pawn Other, string kickMessage){
 
 
-	Other.ClientMessage(kickMessagePrefix $ kickMessageStart);
-	Other.ClientMessage(kickMessagePrefix $ KickMesssage);
-	Other.ClientMessage(kickMessagePrefix $ kickMessageEnd);
+	//Other.ClientMessage(kickMessagePrefix $ kickMessageStart);
+	//Other.ClientMessage(kickMessagePrefix $ kickMesssage);
+	//Other.ClientMessage(kickMessagePrefix $ kickMessageEnd);
+	//Other.ConsoleCommand("disconnect");
+//	SetTimer(1.0, false, Other);
+	//Other.ClientMessage("disconnect");
 
-	Other.Destroy();
-	return;
+	currentKickMessage = kickMessage;
+
+	currentKickName = Other.PlayerReplicationInfo.PlayerName;
+	SetTimer(1.0, false);
+	//Other.Destroy();
+	//return;
 }
 
 
@@ -111,8 +143,8 @@ defaultproperties
      wildCards(0)="player"
      wildCards(1)="nigger"
      wildCards(2)="faggot"
-     badNames(0)="cunt"
-     badNames(1)="player1"
+     badNames(0)="."
+     badNames(1)="test"
      badNames(2)="player2"
      badNames(3)="player3"
      badNames(4)="player4"
