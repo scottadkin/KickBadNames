@@ -9,7 +9,7 @@ By default this package will stop people joining with player, n****r, c**t, and 
 
 - Place NoNameKick2.u, and NoNameKick2.ini in your UnrealTournament System folder.
 - Open UnrealTournament.ini and find the block called **[Engine.GameEngine]**, or if your server is running XC_Engine **[XC_Engine.XC_GameEngine]**.
-- Added the following line at the end of the block: **ServerActors=NoNameKick2.NoNameKickServerActor**.
+- Added the following line at the end of the block: **ServerActors=NoNameKick3.NoNameKickServerActor**.
 
 
 ## Kick results
@@ -31,7 +31,7 @@ Changing badNames[0] to Ooper instead of player, will kick people with the name 
 If you would like a certain pattern of characters to not be allowed in names, simply change one of the wildcards[number]="" to wildcards[number]="badword".
 
 ```
-[NoNameKick2.KickNoNames]
+[NoNameKick3.KickNoNames]
 kickMessagePrefix="[NoNameKick]:"
 kickMessageStart="You got kicked for using an illegal name."
 kickMessageEnd="You can join the server once you changed your name."
@@ -77,8 +77,8 @@ wildCards[28]=""
 wildCards[29]=""
 wildCards[30]=""
 wildCards[31]=""
-badNames[0]="Cunt"
-badNames[1]="player1"
+badNames[0]="."
+badNames[1]="test"
 badNames[2]="player2"
 badNames[3]="player3"
 badNames[4]="player4"
